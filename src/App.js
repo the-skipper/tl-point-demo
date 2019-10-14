@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import Map from "./Map/Map";
+import Div100vh from "react-div-100vh";
+import CSVDropzone from "./Dropzone/Dropzone";
+import ODList from "./ODList/ODList";
+
+import { CsvProvider } from "./CsvContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Div100vh className="App">
+      <div className="Map-container">
+        <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
+      </div>
+      <div className="Point-list-container">
+        <CsvProvider>
+          <CSVDropzone />
+          <ODList />
+        </CsvProvider>
+      </div>
+    </Div100vh>
   );
 }
 

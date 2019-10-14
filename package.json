@@ -3,8 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-brands-svg-icons": "^5.11.2",
+    "@fortawesome/free-regular-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.6",
+    "csvtojson": "^2.0.10",
+    "papaparse": "^5.1.0",
     "react": "^16.10.2",
+    "react-div-100vh": "^0.3.4",
     "react-dom": "^16.10.2",
+    "react-dropzone": "^10.1.10",
     "react-scripts": "3.2.0"
   },
   "scripts": {
