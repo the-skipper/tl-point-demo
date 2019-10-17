@@ -11,15 +11,15 @@ import { CsvProvider } from "./CsvContext";
 function App() {
   return (
     <Div100vh className="App">
-      <div className="Map-container">
-        <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
-      </div>
-      <div className="Point-list-container">
-        <CsvProvider>
+      <CsvProvider>
+        <div className="Map-container">
+          <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
+        </div>
+        <div className="Point-list-container">
           <CSVDropzone />
           <ODList />
-        </CsvProvider>
-      </div>
+        </div>
+      </CsvProvider>
     </Div100vh>
   );
 }

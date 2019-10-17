@@ -5,8 +5,14 @@ const useCsvData = () => {
   const [state, setState] = useContext(CsvContext);
 
   function setData({ data }) {
-    setState(state => ({ ...state, arrays: data.slice(1) })); // remove header row.
-    console.log(data.slice(1));
+    let flat_data = data.slice(1).flat();
+    let coordinates = [];
+    for (let i = 0; i < flat_data.length; i += 2) {
+      coordinates.push({ latitude: flat_data[i], longitude: flat_data[i + 1] });
+    }
+
+    setState(state => ({ ...state, rows: data.slice(1), coords: coordinates })); // remove header row.
+    // console.log(coordinates);
   }
 
   function selectRow(index) {
@@ -16,7 +22,7 @@ const useCsvData = () => {
   return {
     setData,
     selectRow,
-    csvRows: state
+    data: state
   };
 };
 
