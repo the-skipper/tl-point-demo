@@ -17,6 +17,11 @@ function App() {
         </div>
         <div className="Point-list-container">
           <CSVDropzone />
+          <div id="save">
+            <p>Query Interval :</p>
+            <input></input>
+            <div>Save</div>
+          </div>
           <ODList />
         </div>
       </CsvProvider>
