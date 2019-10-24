@@ -33,10 +33,11 @@ class Map extends React.Component {
 
   componentDidMount() {
     this.platform = new window.H.service.Platform(this.state);
-
     var layer = this.platform.createDefaultLayers();
     var container = document.getElementById("here-map");
-    const center = getCenter(this.context[0].coords);
+    const center = getCenter(
+      this.context[0].coords.d.concat(this.context[0].coords.o)
+    );
     this.map = new window.H.Map(container, layer.vector.normal.map, {
       center: center || this.state.center,
       zoom: this.state.zoom,
@@ -60,16 +61,21 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log(this.context);
     // Position map on center point view.
-    let center = getCenter(this.context[0].coords);
+    let center = getCenter(
+      this.context[0].coords.d.concat(this.context[0].coords.o)
+    );
     center = center
       ? { lat: center.latitude, lng: center.longitude }
       : { lat: this.props.lat, lng: this.props.lng };
     this.map.setCenter(center);
 
-    this.context[0].rows.forEach(row => {
-      this.addOriginMarker({ lat: row[0], lng: row[1] });
-      this.addDestinationMarker({ lat: row[2], lng: row[3] });
+    this.context[0].coords.o.forEach(row => {
+      this.addOriginMarker({ lat: row.latitude, lng: row.longitude });
+    });
+    this.context[0].coords.d.forEach(row => {
+      this.addDestinationMarker({ lat: row.latitude, lng: row.longitude });
     });
   }
 

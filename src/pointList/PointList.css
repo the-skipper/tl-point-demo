@@ -1,5 +1,6 @@
-.od-list {
+.point-list {
     height: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -8,7 +9,7 @@
     padding: 0;
 }
 
-.od-list li:nth-child(even) {
+.point-list li:nth-child(even) {
     background-color: #2a2f37;
 }
 

@@ -5,7 +5,7 @@ const CsvContext = React.createContext([{}, () => {}]);
 const CsvProvider = props => {
   const [state, setState] = useState({
     rows: [],
-    coords: []
+    coords: {o:[],d:[]}
   });
   return (
     <CsvContext.Provider value={[state, setState]}>

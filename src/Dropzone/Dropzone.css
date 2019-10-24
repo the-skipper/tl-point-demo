@@ -1,4 +1,7 @@
 .csv-dropzone {
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
     background-color: #009688;
     color: white;
     font-family: sans-serif;

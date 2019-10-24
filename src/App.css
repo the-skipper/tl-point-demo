@@ -30,7 +30,7 @@
   background: #09d3ac;
 }
 
-.Point-list-container {
+.sidenav {
   height: 50%;
   width: 100%;
   background: #282c34;
@@ -44,11 +44,14 @@
   /* IE 10+*/
 }
 
-.Point-list-container::-webkit-scrollbar {
+.sidenav::-webkit-scrollbar {
   /* WebKit */
   width: 0px;
 }
 
+.point-lists{
+  display: flex;
+}
 
 /* 
   ##Device = Desktops
@@ -65,16 +68,21 @@
     width: 70%;
   }
 
-  .Point-list-container {
+  .point-lists{
+    height: 100%;
+  }
+
+  .sidenav {
     height: 100%;
     width: 30%;
     background: #282c34;
     overflow: hidden;
     overflow-y: scroll;
+    position: relative;
     scrollbar-width: none;
   }
 
-  .Point-list-container::-webkit-scrollbar {
+  .sidenav::-webkit-scrollbar {
     /* WebKit */
     width: 0px;
   }
