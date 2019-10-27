@@ -43,9 +43,11 @@ function CSVDropzone() {
   return (
     <div {...getRootProps()} className="csv-dropzone" types="images">
       <input {...getInputProps()} />
-      <FontAwesomeIcon icon={faPlus} fixedWidth />
-      <FontAwesomeIcon icon={faFileCsv} size="2x" fixedWidth />
-      <p>Drag & drop or click to upload.</p>
+      <p>
+        <FontAwesomeIcon icon={faFileCsv} size="2x" fixedWidth />
+        <br />
+        Upload CSV
+      </p>
     </div>
   );
 }

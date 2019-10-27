@@ -7,6 +7,7 @@ import CSVDropzone from "./Dropzone/Dropzone";
 import PointList from "./pointList/PointList";
 
 import { CsvProvider } from "./CsvContext";
+import StepProgressBar from "./ProgressBar/StepProgressBar";
 
 function App() {
   return (
@@ -15,12 +16,22 @@ function App() {
         <div className="Map-container">
           <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
         </div>
-        <div className="sidenav">
-          <CSVDropzone />
-          <div className="point-lists">
-            <PointList pointType="o" />
-            <PointList pointType="d" />
+        <div className="ui-container">
+          <StepProgressBar />
+          <div className="step-view">
+            <div className="step"></div>
+            <div className="step">
+              <CSVDropzone />
+            </div>
+            <div className="step">
+              <div className="point-lists">
+                <PointList pointType="o" />
+                <PointList pointType="d" />
+              </div>
+            </div>
+            <div className="step"></div>
           </div>
+          {/* <CSVDropzone /> */}
         </div>
       </CsvProvider>
     </Div100vh>

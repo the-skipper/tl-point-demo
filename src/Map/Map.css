@@ -1,4 +1,6 @@
 .here-map-view {
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
+    background: #0c0c0d
 }

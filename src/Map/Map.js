@@ -22,12 +22,12 @@ class Map extends React.Component {
     this.handleResize = this.handleResize.bind(this);
     this.handleMapClick = this.handleMapClick.bind(this);
     this.DIcon = new window.H.map.Icon(
-      "https://cdn1.iconfinder.com/data/icons/cartoon-snack/128/pizza-512.png",
-      { size: { w: 56, h: 56 } }
+      "https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png",
+      { size: { w: 24, h: 24 } }
     );
     this.OIcon = new window.H.map.Icon(
-      "https://cdn2.iconfinder.com/data/icons/household-things/64/house_gasstove_n_oven-256.png",
-      { size: { w: 56, h: 56 } }
+      "https://cdn1.iconfinder.com/data/icons/ecommerce-61/48/eccomerce_-_location-512.png",
+      { size: { w: 24, h: 24 } }
     );
   }
 
