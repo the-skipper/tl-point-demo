@@ -1,0 +1,36 @@
+.point-item {
+  display: flex;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  justify-content: space-between;
+  font-family: inherit;
+  font-weight: 200;
+  color: #cacaca;
+}
+
+.point-item > div {
+  display: flex;
+  padding: 0.2rem;
+}
+
+.point-item > div > p {
+  padding: 0;
+  margin: 0;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.point-item:hover {
+  background-color: rgb(2, 2, 2) !important;
+}
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  .point-item {
+    padding: 0.25rem;
+  }
+}

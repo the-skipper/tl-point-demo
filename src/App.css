@@ -20,22 +20,45 @@
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
-}
-
 .Map-container {
+  position: absolute;
   height: 50%;
   width: 100%;
-  background: #09d3ac;
+  background: #0c0c0d;
 }
 
-.Point-list-container {
-  height: 50%;
-  width: 100%;
-  background: #282c34;
+.step-view {
   display: flex;
-  flex-direction: column-reverse;
+  flex-wrap: nowrap;
+  height: 100%;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.step {
+  color: white;
+  width: 100%;
+  height: 100%;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  scroll-snap-align: center;
+}
+
+.step-view * {
+  outline: none;
+}
+
+.ui-container {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  position: absolute;
+  top: 47%;
+  z-index: 10;
+  height: 53%;
+  width: 100%;
+  background: #151515;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -44,11 +67,12 @@
   /* IE 10+*/
 }
 
-.Point-list-container::-webkit-scrollbar {
+.ui-container::-webkit-scrollbar {
   /* WebKit */
   width: 0px;
 }
 
+<<<<<<< HEAD
 #save{
   display: flex;
   justify-content: space-around;
@@ -86,6 +110,15 @@
 
 #save>div:active{
   background-color: rgb(6, 102, 102);
+=======
+.point-lists {
+  display: flex;
+  height: 100%;
+}
+
+.step-progress-bar {
+  margin: 1rem;
+>>>>>>> ebf5ecc159a3d808798d6590a36341cd11cd3737
 }
 
 /* 
@@ -101,24 +134,29 @@
   .Map-container {
     height: 100%;
     width: 70%;
+    position: relative;
+    background: #0c0c0d;
   }
 
-  .Point-list-container {
+  .ui-container {
     height: 100%;
     width: 30%;
-    background: #282c34;
+    top: 0px;
     overflow: hidden;
     overflow-y: scroll;
-    scrollbar-width: none;
+    flex-direction: column-reverse;
+    position: relative;
+    border-radius: 0px;
   }
 
-  .Point-list-container::-webkit-scrollbar {
+  .ui-container::-webkit-scrollbar {
     /* WebKit */
     width: 0px;
   }
 
-
-
+  .step-view {
+    overflow: hidden;
+  }
 }
 
 /* 
@@ -126,7 +164,8 @@
   ##Screen = B/w 1025px to 1280px
 */
 
-@media (min-width: 1025px) and (max-width: 1280px) {}
+@media (min-width: 1025px) and (max-width: 1280px) {
+}
 
 /* 
   ##Device = Tablets, Ipads (portrait)
