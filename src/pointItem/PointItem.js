@@ -13,14 +13,11 @@ function PointItem({
   itemClass = "origin",
   markerColor = "green"
 }) {
-  const { selectRow } = useCsvData();
-  const [state, setstate] = useState({ selected: false });
+  const { selectRow, data:state } = useCsvData();
   return (
     <li
-      className={`point-item ${state.selected && "selected"}`}
+      className={`point-item ${state.selectedPoints.indexOf(index)!==-1?"selected":""}`}
       onClick={() => {
-        setstate({ selected: !state.selected });
-        console.log(`${index} + Click`);
         selectRow(index, pointType);
       }}
     >

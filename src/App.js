@@ -16,16 +16,6 @@ function App() {
         <div className="Map-container">
           <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
         </div>
-<<<<<<< HEAD
-        <div className="Point-list-container">
-          <CSVDropzone />
-          <div id="save">
-            <p>Query Interval :</p>
-            <input></input>
-            <div>Save</div>
-          </div>
-          <ODList />
-=======
         <div className="ui-container">
           <StepProgressBar />
           <div className="step-view">
@@ -42,7 +32,6 @@ function App() {
             <div className="step"></div>
           </div>
           {/* <CSVDropzone /> */}
->>>>>>> ebf5ecc159a3d808798d6590a36341cd11cd3737
         </div>
       </CsvProvider>
     </Div100vh>

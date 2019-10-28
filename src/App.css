@@ -72,45 +72,6 @@
   width: 0px;
 }
 
-<<<<<<< HEAD
-#save{
-  display: flex;
-  justify-content: space-around;
-  color: white;
-  height: 2rem;
-  align-items:center;
-}
-
-#save>p{
-  width:30%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#save>input{
-  width: 40%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  text-align: center;
-  border: none;
-}
-
-#save>div{
-  width: 30%;
-  height: 100%;
-  background-color: teal;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  cursor: pointer;
-}
-
-#save>div:active{
-  background-color: rgb(6, 102, 102);
-=======
 .point-lists {
   display: flex;
   height: 100%;
@@ -118,7 +79,6 @@
 
 .step-progress-bar {
   margin: 1rem;
->>>>>>> ebf5ecc159a3d808798d6590a36341cd11cd3737
 }
 
 /* 

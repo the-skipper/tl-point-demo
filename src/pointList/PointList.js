@@ -15,7 +15,7 @@ function PointList({ pointType = "o" }) {
           <PointItem
             key={index}
             data={row}
-            index={index}
+            index={`${pointType}-${index}`}
             markerColor={pointType === "o" ? "#00c0ed" : "#a9271d"}
             pointType={pointType}
           ></PointItem>
