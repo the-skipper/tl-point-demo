@@ -6,8 +6,7 @@ import PointItem from "../pointItem/PointItem";
 import useCsvData from "../useCsvData";
 
 function PointList({ pointType = "o" }) {
-  const { data, selectRow } = useCsvData();
-
+  const { data } = useCsvData();
   return (
     <ul className="point-list">
       {data.coords[pointType] &&

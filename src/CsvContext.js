@@ -6,9 +6,10 @@ const CsvProvider = props => {
   const [state, setState] = useState({
     rows: [],
     coords: { o: [], d: [] },
-    origins: [],
-    destinations: [],
-    selectedPoints: []
+    selectedOrigins: [],
+    selectedDestinations: [],
+    selectedPoints: [],
+    currentGroup: ""
   });
   return (
     <CsvContext.Provider value={[state, setState]}>

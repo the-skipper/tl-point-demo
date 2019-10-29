@@ -8,8 +8,13 @@ import PointList from "./pointList/PointList";
 
 import { CsvProvider } from "./CsvContext";
 import StepProgressBar from "./ProgressBar/StepProgressBar";
+import GroupInput from "./Input/Input";
+
+// const InputExampleInput = () => <Input placeholder="Search..." />;
+import useCsvData from "./useCsvData";
 
 function App() {
+  const { addGroup } = useCsvData();
   return (
     <Div100vh className="App">
       <CsvProvider>
@@ -19,11 +24,25 @@ function App() {
         <div className="ui-container">
           <StepProgressBar />
           <div className="step-view">
-            <div className="step"></div>
             <div className="step">
+              <div className="step-description">
+                <h2>Step 1.</h2>
+                <p>Select/Create a group.</p>
+              </div>
+              <GroupInput></GroupInput>
+            </div>
+            <div className="step">
+              <div className="step-description">
+                <h2>Step 2.</h2>
+                <p>Upload CSV file for group</p>
+              </div>
               <CSVDropzone />
             </div>
             <div className="step">
+              <div className="step-description">
+                <h2>Step 3.</h2>
+                <p>Upload CSV file for group</p>
+              </div>
               <div className="point-lists">
                 <PointList pointType="o" />
                 <PointList pointType="d" />
@@ -31,7 +50,6 @@ function App() {
             </div>
             <div className="step"></div>
           </div>
-          {/* <CSVDropzone /> */}
         </div>
       </CsvProvider>
     </Div100vh>

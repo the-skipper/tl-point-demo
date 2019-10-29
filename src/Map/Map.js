@@ -63,20 +63,26 @@ class Map extends React.Component {
   componentDidUpdate() {
     console.log(this.context);
     // Position map on center point view.
-    let center = getCenter(
-      this.context[0].coords.d.concat(this.context[0].coords.o)
-    );
-    center = center
-      ? { lat: center.latitude, lng: center.longitude }
-      : { lat: this.props.lat, lng: this.props.lng };
-    this.map.setCenter(center);
+    if (
+      this.context[0].coords.d.length > 0 ||
+      this.context[0].coords.o.length > 0
+    ) {
+      let center = getCenter([
+        ...this.context[0].coords.d,
+        ...this.context[0].coords.o
+      ]);
+      center = center
+        ? { lat: center.latitude, lng: center.longitude }
+        : { lat: this.props.lat, lng: this.props.lng };
+      this.map.setCenter(center);
 
-    this.context[0].coords.o.forEach(row => {
-      this.addOriginMarker({ lat: row.latitude, lng: row.longitude });
-    });
-    this.context[0].coords.d.forEach(row => {
-      this.addDestinationMarker({ lat: row.latitude, lng: row.longitude });
-    });
+      this.context[0].coords.o.forEach(row => {
+        this.addOriginMarker({ lat: row.latitude, lng: row.longitude });
+      });
+      this.context[0].coords.d.forEach(row => {
+        this.addDestinationMarker({ lat: row.latitude, lng: row.longitude });
+      });
+    }
   }
 
   componentWillUnmount() {

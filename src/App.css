@@ -36,6 +36,7 @@
 }
 
 .step {
+  /* padding: 1rem; */
   color: white;
   width: 100%;
   height: 100%;
@@ -74,11 +75,27 @@
 
 .point-lists {
   display: flex;
-  height: 100%;
+  height: 80%;
+  padding: 0.5rem;
 }
 
 .step-progress-bar {
   margin: 1rem;
+}
+
+.group-input {
+  padding: 1rem;
+}
+
+.step-description {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-content: center;
+  max-height: 20%;
+}
+h2 {
+  margin: 0;
 }
 
 /* 

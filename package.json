@@ -16,7 +16,8 @@
     "react-dom": "^16.10.2",
     "react-dropzone": "^10.1.10",
     "react-scripts": "3.2.0",
-    "react-step-progress-bar": "^1.0.3"
+    "react-step-progress-bar": "^1.0.3",
+    "semantic-ui-react": "^0.88.1"
   },
   "scripts": {
     "start": "react-scripts start",

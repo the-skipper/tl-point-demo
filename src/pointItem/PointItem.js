@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapPin } from "@fortawesome/free-solid-svg-icons";
 
 import useCsvData from "../useCsvData";
-import { useState } from "react";
 
 function PointItem({
   data,
@@ -13,12 +12,14 @@ function PointItem({
   itemClass = "origin",
   markerColor = "green"
 }) {
-  const { selectRow, data:state } = useCsvData();
+  const { selectRow, data: state } = useCsvData();
   return (
     <li
-      className={`point-item ${state.selectedPoints.indexOf(index)!==-1?"selected":""}`}
+      className={`point-item ${
+        state.selectedPoints.indexOf(index) !== -1 ? "selected" : ""
+      }`}
       onClick={() => {
-        selectRow(index, pointType);
+        selectRow(index, pointType, `${data.latitude},${data.longitude}`);
       }}
     >
       <div className={itemClass}>
