@@ -24,7 +24,7 @@ function App() {
         const res = await axios(
           "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
         );
-        setstate({ ...state, groups: res });
+        setstate({ ...state, groups: res.data.groups });
       } catch (e) {}
     }
     getGroups();
