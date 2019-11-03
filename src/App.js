@@ -9,12 +9,26 @@ import PointList from "./pointList/PointList";
 import { CsvProvider } from "./CsvContext";
 import StepProgressBar from "./ProgressBar/StepProgressBar";
 import GroupInput from "./Input/Input";
-
+import axios from "axios";
 // const InputExampleInput = () => <Input placeholder="Search..." />;
 import useCsvData from "./useCsvData";
 
+import { useState, useEffect } from "react";
+
 function App() {
   const { addGroup } = useCsvData();
+  const [state, setstate] = useState({ groups: [] });
+  useEffect(() => {
+    async function getGroups() {
+      try {
+        const res = await axios(
+          "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
+        );
+        setstate({ ...state, groups: res });
+      } catch (e) {}
+    }
+    getGroups();
+  }, []);
   return (
     <Div100vh className="App">
       <CsvProvider>
@@ -22,7 +36,7 @@ function App() {
           <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
         </div>
         <div className="ui-container">
-          <StepProgressBar />
+          {/* <StepProgressBar /> */}
           <div className="step-view">
             <div className="step">
               <div className="step-description">
