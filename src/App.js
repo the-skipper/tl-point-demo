@@ -16,19 +16,23 @@ import { Button, Icon, List } from "semantic-ui-react";
 import { useState, useEffect } from "react";
 
 function App() {
-  const { addGroup } = useCsvData();
-  const [state, setstate] = useState({ groups: [] });
+  const { data } = useCsvData();
+  const [state, setState] = useState({ groups: [] });
   useEffect(() => {
     async function getGroups() {
       try {
         const res = await axios(
           "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
         );
-        setstate({ ...state, groups: res.data.groups });
+        setState({ ...state, groups: res.data.groups });
       } catch (e) {}
     }
     getGroups();
   }, []);
+
+  function scrollView(e) {
+    console.log(e._targetInst)
+  }
   return (
     <Div100vh className="App">
       <CsvProvider>
@@ -50,7 +54,7 @@ function App() {
                 relaxed
                 items={state.groups}
               />
-              <Button icon primary fluid labelPosition="right">
+              <Button icon primary fluid labelPosition="right" onClick={(e)=>{scrollView(e);}}>
                 Next
                 <Icon name="right arrow" />
               </Button>
@@ -61,18 +65,32 @@ function App() {
                 <p>Upload CSV file for group</p>
               </div>
               <CSVDropzone />
+              <Button icon primary fluid labelPosition="right">
+                Next
+                <Icon name="right arrow" />
+              </Button>
             </div>
             <div className="step">
               <div className="step-description">
                 <h2>Step 3.</h2>
-                <p>Upload CSV file for group</p>
+                <p>Select origin and data points</p>
               </div>
               <div className="point-lists">
                 <PointList pointType="o" />
                 <PointList pointType="d" />
               </div>
+              <Button icon primary fluid labelPosition="right">
+                Next
+                <Icon name="right arrow" />
+              </Button>
             </div>
-            <div className="step"></div>
+            <div className="step">
+              <h2>Step 4.</h2>
+              <p>Set cron interval and publish group</p>
+              <Button icon primary fluid labelPosition="right">
+                Publish group
+              </Button>
+            </div>
           </div>
         </div>
       </CsvProvider>

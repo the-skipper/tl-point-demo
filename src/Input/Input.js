@@ -9,6 +9,7 @@ const GroupInput = () => {
     <Input
       className="group-input"
       fluid={true}
+      action={{content:'Add', onClick:()=>{}}}
       placeholder="Enter group name"
       onChange={(event, data) => {
         addGroup(data.value);
