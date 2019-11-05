@@ -87,6 +87,18 @@
   padding: 1rem;
 }
 
+.group-list {
+  height: 40%;
+}
+.group-list > .item {
+  text-align: left;
+  /* background: lightblue; */
+  padding: 0.5rem !important;
+  margin: 0.5rem;
+  border: 1px solid white !important;
+  border-radius: 0.3rem;
+}
+
 .step-description {
   display: flex;
   flex-direction: column;
@@ -100,10 +112,10 @@ h2 {
 
 /* 
   ##Device = Desktops
-  ##Screen = 1281px to higher resolution desktops
+  ##Screen = 968px to higher resolution desktops
 */
 
-@media (min-width: 1281px) {
+@media (min-width: 968px) {
   .App {
     flex-direction: row;
   }
@@ -135,17 +147,8 @@ h2 {
     height: 100%;
     overflow: hidden;
   }
+
+  .group-list {
+    height: 80%;
+  }
 }
-
-/* 
-  ##Device = Laptops, Desktops
-  ##Screen = B/w 1025px to 1280px
-*/
-
-@media (min-width: 1025px) and (max-width: 1280px) {
-}
-
-/* 
-  ##Device = Tablets, Ipads (portrait)
-  ##Screen = B/w 768px to 1024px
-*/

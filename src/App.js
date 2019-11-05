@@ -12,7 +12,7 @@ import GroupInput from "./Input/Input";
 import axios from "axios";
 // const InputExampleInput = () => <Input placeholder="Search..." />;
 import useCsvData from "./useCsvData";
-
+import { Button, Icon, List } from "semantic-ui-react";
 import { useState, useEffect } from "react";
 
 function App() {
@@ -44,6 +44,16 @@ function App() {
                 <p>Select/Create a group.</p>
               </div>
               <GroupInput></GroupInput>
+              <List
+                className="group-list"
+                divided
+                relaxed
+                items={state.groups}
+              />
+              <Button icon primary fluid labelPosition="right">
+                Next
+                <Icon name="right arrow" />
+              </Button>
             </div>
             <div className="step">
               <div className="step-description">
