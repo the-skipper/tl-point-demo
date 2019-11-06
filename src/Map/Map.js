@@ -61,7 +61,6 @@ class Map extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.context);
     // Position map on center point view.
     if (
       this.context[0].coords.d.length > 0 ||

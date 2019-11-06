@@ -8,16 +8,20 @@ import PointList from "./pointList/PointList";
 
 import { CsvProvider } from "./CsvContext";
 import StepProgressBar from "./ProgressBar/StepProgressBar";
-import GroupInput from "./Input/Input";
+// import GroupInput from "./Input/Input";
 import axios from "axios";
 // const InputExampleInput = () => <Input placeholder="Search..." />;
-import useCsvData from "./useCsvData";
-import { Button, Icon, List } from "semantic-ui-react";
+import { Button, Icon, Input, List } from "semantic-ui-react";
 import { useState, useEffect } from "react";
+import { stat } from "fs";
 
 function App() {
-  const { data } = useCsvData();
-  const [state, setState] = useState({ groups: [] });
+  const [state, setState] = useState({
+    groups: [],
+    groupInputVal: "",
+    cronInputVal: "",
+    selectedGroup: ""
+  });
   useEffect(() => {
     async function getGroups() {
       try {
@@ -30,8 +34,42 @@ function App() {
     getGroups();
   }, []);
 
-  function scrollView(e) {
-    console.log(e._targetInst)
+  async function updateCron(value) {
+    try {
+      const res = await axios.put(
+        "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron",
+        { cron: value }
+      );
+      console.log(res.data.message);
+      // setState({ ...state, groups: res.data.groups });
+    } catch (e) {}
+  }
+
+  async function postGroup(body) {
+    try {
+      const res = await axios.post(
+        "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron",
+        { name: state.selectedGroup }
+      );
+      console.log(res.data.message);
+      // setState({ ...state, groups: res.data.groups });
+    } catch (e) {}
+  }
+
+  function removeOrAppend(val, arr) {
+    let result = [];
+    if (arr.includes(val)) {
+      result = arr.filter(e => e !== val);
+    } else {
+      result = [...arr, val];
+    }
+    return result;
+  }
+
+  function animateNextStep(e, direction = 1) {
+    let key = direction < 0 ? "previousElementSibling" : "nextElementSibling";
+    let nextStep = e.target.parentElement[key];
+    if (nextStep) nextStep.scrollIntoView();
   }
   return (
     <Div100vh className="App">
@@ -47,14 +85,40 @@ function App() {
                 <h2>Step 1.</h2>
                 <p>Select/Create a group.</p>
               </div>
-              <GroupInput></GroupInput>
+              {/* <GroupInput></GroupInput> */}
+              <Input
+                className="group-input"
+                fluid={true}
+                action={{
+                  content: "Add",
+                  onClick: () => {
+                    setState({
+                      ...state,
+                      groups: removeOrAppend(state.groupInputVal, state.groups)
+                    });
+                  }
+                }}
+                onChange={(e, d) => {
+                  setState({ ...state, groupInputVal: d.value });
+                }}
+                placeholder="Enter group name"
+              />
               <List
                 className="group-list"
                 divided
                 relaxed
+                onItemClick={(e, d) => {
+                  setState({ ...state, selectedGroup: d.content });
+                }}
                 items={state.groups}
               />
-              <Button icon primary fluid labelPosition="right" onClick={(e)=>{scrollView(e);}}>
+              <Button
+                icon
+                primary
+                fluid
+                labelPosition="right"
+                onClick={e => animateNextStep(e)}
+              >
                 Next
                 <Icon name="right arrow" />
               </Button>
@@ -62,10 +126,24 @@ function App() {
             <div className="step">
               <div className="step-description">
                 <h2>Step 2.</h2>
-                <p>Upload CSV file for group</p>
+                <p>Upload CSV file for {state.selectedGroup} group</p>
               </div>
               <CSVDropzone />
-              <Button icon primary fluid labelPosition="right">
+              <Button
+                icon
+                primary
+                labelPosition="left"
+                onClick={e => animateNextStep(e, -1)}
+              >
+                Back
+                <Icon name="left arrow" />
+              </Button>
+              <Button
+                icon
+                primary
+                labelPosition="right"
+                onClick={e => animateNextStep(e)}
+              >
                 Next
                 <Icon name="right arrow" />
               </Button>
@@ -79,7 +157,21 @@ function App() {
                 <PointList pointType="o" />
                 <PointList pointType="d" />
               </div>
-              <Button icon primary fluid labelPosition="right">
+              <Button
+                icon
+                primary
+                labelPosition="left"
+                onClick={e => animateNextStep(e, -1)}
+              >
+                Back
+                <Icon name="left arrow" />
+              </Button>
+              <Button
+                icon
+                primary
+                labelPosition="right"
+                onClick={e => animateNextStep(e)}
+              >
                 Next
                 <Icon name="right arrow" />
               </Button>
@@ -87,8 +179,42 @@ function App() {
             <div className="step">
               <h2>Step 4.</h2>
               <p>Set cron interval and publish group</p>
-              <Button icon primary fluid labelPosition="right">
+              <Input
+                className="group-input"
+                fluid={true}
+                action={{
+                  content: "Set",
+                  onClick: async () => {
+                    setState({
+                      ...state,
+                      cron: state.cronInputVal
+                    });
+                    await updateCron(state.cronInputVal);
+                  }
+                }}
+                onChange={(e, d) => {
+                  setState({ ...state, cronInputVal: d.value });
+                }}
+                placeholder="Enter valid cron expression"
+              />
+              <Button
+                icon
+                primary
+                fluid
+                labelPosition="right"
+                onClick={() => {}}
+              >
                 Publish group
+              </Button>
+              <Button
+                icon
+                primary
+                fluid
+                labelPosition="left"
+                onClick={e => animateNextStep(e, -1)}
+              >
+                Back
+                <Icon name="left arrow" />
               </Button>
             </div>
           </div>

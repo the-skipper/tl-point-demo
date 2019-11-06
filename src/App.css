@@ -33,6 +33,7 @@
   flex-wrap: nowrap;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
 .step {
@@ -47,6 +48,10 @@
 
 .step-view * {
   outline: none;
+}
+
+.step > button {
+  margin-top: 1rem !important;
 }
 
 .ui-container {
@@ -75,7 +80,7 @@
 
 .point-lists {
   display: flex;
-  height: 70%;
+  height: 90%;
   padding: 0.5rem;
 }
 
@@ -97,6 +102,7 @@
   margin: 0.5rem;
   border: 1px solid white !important;
   border-radius: 0.3rem;
+  cursor: pointer;
 }
 
 .step-description {
@@ -146,7 +152,7 @@ h2 {
   .step-view {
     height: 100%;
     overflow: hidden;
-    overflow-x:auto;
+    overflow-x: auto;
   }
 
   .group-list {
