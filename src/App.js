@@ -5,15 +5,16 @@ import Map from "./Map/Map";
 import Div100vh from "react-div-100vh";
 import CSVDropzone from "./Dropzone/Dropzone";
 import PointList from "./pointList/PointList";
+import PublishButton from "./PublishButton/PublishButton";
 
 import { CsvProvider } from "./CsvContext";
-import StepProgressBar from "./ProgressBar/StepProgressBar";
+// import StepProgressBar from "./ProgressBar/StepProgressBar";
 // import GroupInput from "./Input/Input";
 import axios from "axios";
 // const InputExampleInput = () => <Input placeholder="Search..." />;
 import { Button, Icon, Input, List } from "semantic-ui-react";
 import { useState, useEffect } from "react";
-import { stat } from "fs";
+
 
 function App() {
   const [state, setState] = useState({
@@ -39,17 +40,6 @@ function App() {
       const res = await axios.put(
         "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron",
         { cron: value }
-      );
-      console.log(res.data.message);
-      // setState({ ...state, groups: res.data.groups });
-    } catch (e) {}
-  }
-
-  async function postGroup(body) {
-    try {
-      const res = await axios.post(
-        "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron",
-        { name: state.selectedGroup }
       );
       console.log(res.data.message);
       // setState({ ...state, groups: res.data.groups });
@@ -197,7 +187,8 @@ function App() {
                 }}
                 placeholder="Enter valid cron expression"
               />
-              <Button
+              <PublishButton selectedGroup={state.selectedGroup}/>
+              {/* <Button
                 icon
                 primary
                 fluid
@@ -205,7 +196,7 @@ function App() {
                 onClick={() => {}}
               >
                 Publish group
-              </Button>
+              </Button> */}
               <Button
                 icon
                 primary
