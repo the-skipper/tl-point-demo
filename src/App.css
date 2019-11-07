@@ -104,6 +104,13 @@
   border-radius: 0.3rem;
   cursor: pointer;
 }
+.group-list > .selected {
+  background: #1b77be;
+}
+
+.group-list > .item > .content {
+  display: inline-block !important;
+}
 
 .step-description {
   display: flex;

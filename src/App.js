@@ -6,16 +6,19 @@ import Div100vh from "react-div-100vh";
 import CSVDropzone from "./Dropzone/Dropzone";
 import PointList from "./pointList/PointList";
 import PublishButton from "./PublishButton/PublishButton";
-
 import { CsvProvider } from "./CsvContext";
 // import StepProgressBar from "./ProgressBar/StepProgressBar";
 // import GroupInput from "./Input/Input";
 import axios from "axios";
 // const InputExampleInput = () => <Input placeholder="Search..." />;
-import { Button, Icon, Input, List } from "semantic-ui-react";
+import { Button, Icon, Input, List, Image } from "semantic-ui-react";
 import { useState, useEffect } from "react";
+import PulseIcon from "./PulseIcon/PulseIcon";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+toast.configure();
 function App() {
   const [state, setState] = useState({
     groups: [],
@@ -30,18 +33,29 @@ function App() {
           "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
         );
         setState({ ...state, groups: res.data.groups });
-      } catch (e) {}
+      } catch (e) {
+        return e;
+      }
     }
     getGroups();
   }, []);
 
   async function updateCron(value) {
+    let request = {
+      host: "g84ric8qt4.execute-api.eu-west-3.amazonaws.com",
+      method: "PUT",
+      url: `https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron`,
+      data: { cron: value }, // object describing the foo
+      body: JSON.stringify({ cron: value }), // aws4 looks for body; axios for data
+      path: `/live/cron`,
+      headers: {
+        "content-type": "application/json"
+      }
+    };
+
     try {
-      const res = await axios.put(
-        "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron",
-        { cron: value }
-      );
-      console.log(res.data.message);
+      const res = await axios(request);
+      toast(res.data.message);
       // setState({ ...state, groups: res.data.groups });
     } catch (e) {}
   }
@@ -75,7 +89,6 @@ function App() {
                 <h2>Step 1.</h2>
                 <p>Select/Create a group.</p>
               </div>
-              {/* <GroupInput></GroupInput> */}
               <Input
                 className="group-input"
                 fluid={true}
@@ -93,15 +106,42 @@ function App() {
                 }}
                 placeholder="Enter group name"
               />
-              <List
+              <List celled inverted className="group-list">
+                {state.groups.map(group => {
+                  return (
+                    <List.Item
+                      key={group}
+                      className={
+                        state.selectedGroup === group ? "selected" : ""
+                      }
+                      onClick={(e, d) => {
+                        toast("Group added");
+                        setState({
+                          ...state,
+                          selectedGroup: e.target.lastChild.firstChild.innerText
+                        });
+                      }}
+                    >
+                      <PulseIcon />
+                      <List.Content>
+                        <List.Header>{group}</List.Header>
+                        created At : -
+                      </List.Content>
+                    </List.Item>
+                  );
+                })}
+              </List>
+              {/* <List
                 className="group-list"
                 divided
+                animated
                 relaxed
                 onItemClick={(e, d) => {
+                  console.log(e);
                   setState({ ...state, selectedGroup: d.content });
                 }}
                 items={state.groups}
-              />
+              /> */}
               <Button
                 icon
                 primary
@@ -187,7 +227,7 @@ function App() {
                 }}
                 placeholder="Enter valid cron expression"
               />
-              <PublishButton selectedGroup={state.selectedGroup}/>
+              <PublishButton selectedGroup={state.selectedGroup} />
               {/* <Button
                 icon
                 primary
