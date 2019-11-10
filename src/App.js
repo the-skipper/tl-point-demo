@@ -17,6 +17,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 function App() {
+  /**
+   * Separate each state object in separate userState
+   * Better practce.
+   * 
+   */
   const [state, setState] = useState({
     groups: [],
     groupInputVal: "",
@@ -29,7 +34,7 @@ function App() {
         const res = await axios(
           "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
         );
-        setState({ ...state, groups: res.data.groups });
+        setState({groups: res.data.groups })
       } catch (e) {
         return e;
       }
@@ -144,7 +149,7 @@ function App() {
               <CSVDropzone />
               <Button
                 icon
-                primary
+                secondary
                 labelPosition="left"
                 onClick={e => animateNextStep(e, -1)}
               >
@@ -172,7 +177,7 @@ function App() {
               </div>
               <Button
                 icon
-                primary
+                secondary
                 labelPosition="left"
                 onClick={e => animateNextStep(e, -1)}
               >
@@ -213,7 +218,7 @@ function App() {
               <PublishButton selectedGroup={state.selectedGroup} />
               <Button
                 icon
-                primary
+                secondary
                 fluid
                 labelPosition="left"
                 onClick={e => animateNextStep(e, -1)}
