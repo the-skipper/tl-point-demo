@@ -7,15 +7,12 @@ import CSVDropzone from "./Dropzone/Dropzone";
 import PointList from "./pointList/PointList";
 import PublishButton from "./PublishButton/PublishButton";
 import { CsvProvider } from "./CsvContext";
-// import StepProgressBar from "./ProgressBar/StepProgressBar";
-// import GroupInput from "./Input/Input";
 import axios from "axios";
-// const InputExampleInput = () => <Input placeholder="Search..." />;
-import { Button, Icon, Input, List, Image } from "semantic-ui-react";
+import { Button, Icon, Input, List } from "semantic-ui-react";
 import { useState, useEffect } from "react";
 import PulseIcon from "./PulseIcon/PulseIcon";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
@@ -52,11 +49,8 @@ function App() {
         "content-type": "application/json"
       }
     };
-
     try {
-      const res = await axios(request);
-      toast(res.data.message);
-      // setState({ ...state, groups: res.data.groups });
+      await axios(request);
     } catch (e) {}
   }
 
@@ -82,7 +76,6 @@ function App() {
           <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
         </div>
         <div className="ui-container">
-          {/* <StepProgressBar /> */}
           <div className="step-view">
             <div className="step">
               <div className="step-description">
@@ -115,10 +108,11 @@ function App() {
                         state.selectedGroup === group ? "selected" : ""
                       }
                       onClick={(e, d) => {
-                        toast("Group added");
+                        let selected = e.target.lastChild.firstChild.innerText;
+                        toast.info(`Group ${selected} selected!`,{autoClose:2300});
                         setState({
                           ...state,
-                          selectedGroup: e.target.lastChild.firstChild.innerText
+                          selectedGroup: selected
                         });
                       }}
                     >
@@ -131,17 +125,6 @@ function App() {
                   );
                 })}
               </List>
-              {/* <List
-                className="group-list"
-                divided
-                animated
-                relaxed
-                onItemClick={(e, d) => {
-                  console.log(e);
-                  setState({ ...state, selectedGroup: d.content });
-                }}
-                items={state.groups}
-              /> */}
               <Button
                 icon
                 primary
@@ -228,15 +211,6 @@ function App() {
                 placeholder="Enter valid cron expression"
               />
               <PublishButton selectedGroup={state.selectedGroup} />
-              {/* <Button
-                icon
-                primary
-                fluid
-                labelPosition="right"
-                onClick={() => {}}
-              >
-                Publish group
-              </Button> */}
               <Button
                 icon
                 primary

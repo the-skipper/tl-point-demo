@@ -20,6 +20,57 @@
   color: white;
 }
 
+.og-marker{
+  width: 25px;
+  height: 25px;
+  border:2px solid;
+  border-radius: 50%;
+  background-color: rgb(32, 115, 240);
+  animation-duration: .5s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-name: blink-og;
+} 
+
+@keyframes blink-og{
+  0%   { background-color:rgb(32, 198, 240)}
+  100%  { background-color:rgb(32, 240, 240)}
+}
+
+@keyframes blink-d{
+  0%   { background-color:rgb(240, 32, 32)}
+  100%  { background-color:rgb(190, 38, 17)}
+}
+
+.og-marker-s{
+  width: 25px;
+  height: 25px;
+  border:2px solid;
+  border-radius: 50%;
+  background-color: rgb(37, 103, 122);
+}
+
+.dest-marker{
+  width: 25px;
+  height: 25px;
+  border:2px solid;
+  border-radius: 50%;
+  background-color: rgb(211, 18, 18);
+  animation-duration: .5s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-name: blink-d;
+}
+
+.dest-marker-s{
+  width: 25px;
+  height: 25px;
+  border:2px solid;
+  border-radius: 50%;
+  background-color: rgb(73, 25, 25);
+
+}
+
 .Map-container {
   position: absolute;
   height: 50%;
@@ -34,6 +85,7 @@
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
+  overflow-y:hidden;
 }
 
 .step {
@@ -94,6 +146,7 @@
 
 .group-list {
   height: 40%;
+  overflow-y: auto;
 }
 .group-list > .item {
   text-align: left;
