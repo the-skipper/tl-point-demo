@@ -3,10 +3,9 @@ import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import "./Dropzone.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileCsv, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faFileCsv} from "@fortawesome/free-solid-svg-icons";
 
 import useCsvData from "../useCsvData";
-import { reject, resolve } from "q";
 
 const parseCSV = async file => {
   return new Promise((resolve, reject) => {
@@ -15,7 +14,7 @@ const parseCSV = async file => {
       complete: json => {
         resolve(json);
       },
-      error: function(err, file, inputElem, reason) {
+      error: function(err,reason) {
         reject({ err, reason });
       }
     });
@@ -25,16 +24,8 @@ const parseCSV = async file => {
 function CSVDropzone() {
   const { setData } = useCsvData();
   const onDrop = useCallback(async acceptedFiles => {
-    // const reader = new FileReader();
-    // reader.onabort = () => console.log("file reading was aborted");
-    // reader.onerror = () => console.log("file reading has failed");
-    // reader.onload = () => {
-    //   const binaryStream = reader.result;
-    //   //   parseCSV();
-    // };
-    // acceptedFiles.forEach(file => reader.readAsArrayBuffer(file));
     setData(await parseCSV(acceptedFiles[0]));
-  }, []);
+  }, [setData]);
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept: ".csv"

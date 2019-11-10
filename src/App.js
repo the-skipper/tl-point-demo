@@ -7,19 +7,21 @@ import CSVDropzone from "./Dropzone/Dropzone";
 import PointList from "./pointList/PointList";
 import PublishButton from "./PublishButton/PublishButton";
 import { CsvProvider } from "./CsvContext";
-// import StepProgressBar from "./ProgressBar/StepProgressBar";
-// import GroupInput from "./Input/Input";
 import axios from "axios";
-// const InputExampleInput = () => <Input placeholder="Search..." />;
-import { Button, Icon, Input, List, Image } from "semantic-ui-react";
+import { Button, Icon, Input, List } from "semantic-ui-react";
 import { useState, useEffect } from "react";
 import PulseIcon from "./PulseIcon/PulseIcon";
 
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
 function App() {
+  /**
+   * Separate each state object in separate userState
+   * Better practce.
+   * 
+   */
   const [state, setState] = useState({
     groups: [],
     groupInputVal: "",
@@ -32,7 +34,7 @@ function App() {
         const res = await axios(
           "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
         );
-        setState({ ...state, groups: res.data.groups });
+        setState({groups: res.data.groups })
       } catch (e) {
         return e;
       }
@@ -52,11 +54,8 @@ function App() {
         "content-type": "application/json"
       }
     };
-
     try {
-      const res = await axios(request);
-      toast(res.data.message);
-      // setState({ ...state, groups: res.data.groups });
+      await axios(request);
     } catch (e) {}
   }
 
@@ -82,7 +81,6 @@ function App() {
           <Map apikey="wlXELNhyBeWmzLjRPGLyer107TNO1Y7Y4B7bvAlPAI4"></Map>
         </div>
         <div className="ui-container">
-          {/* <StepProgressBar /> */}
           <div className="step-view">
             <div className="step">
               <div className="step-description">
@@ -115,10 +113,11 @@ function App() {
                         state.selectedGroup === group ? "selected" : ""
                       }
                       onClick={(e, d) => {
-                        toast("Group added");
+                        let selected = e.target.lastChild.firstChild.innerText;
+                        toast.info(`Group ${selected} selected!`,{autoClose:2300});
                         setState({
                           ...state,
-                          selectedGroup: e.target.lastChild.firstChild.innerText
+                          selectedGroup: selected
                         });
                       }}
                     >
@@ -131,17 +130,6 @@ function App() {
                   );
                 })}
               </List>
-              {/* <List
-                className="group-list"
-                divided
-                animated
-                relaxed
-                onItemClick={(e, d) => {
-                  console.log(e);
-                  setState({ ...state, selectedGroup: d.content });
-                }}
-                items={state.groups}
-              /> */}
               <Button
                 icon
                 primary
@@ -161,7 +149,7 @@ function App() {
               <CSVDropzone />
               <Button
                 icon
-                primary
+                secondary
                 labelPosition="left"
                 onClick={e => animateNextStep(e, -1)}
               >
@@ -189,7 +177,7 @@ function App() {
               </div>
               <Button
                 icon
-                primary
+                secondary
                 labelPosition="left"
                 onClick={e => animateNextStep(e, -1)}
               >
@@ -228,18 +216,9 @@ function App() {
                 placeholder="Enter valid cron expression"
               />
               <PublishButton selectedGroup={state.selectedGroup} />
-              {/* <Button
-                icon
-                primary
-                fluid
-                labelPosition="right"
-                onClick={() => {}}
-              >
-                Publish group
-              </Button> */}
               <Button
                 icon
-                primary
+                secondary
                 fluid
                 labelPosition="left"
                 onClick={e => animateNextStep(e, -1)}
