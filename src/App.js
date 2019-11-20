@@ -32,7 +32,8 @@ function App() {
     async function getGroups() {
       try {
         const res = await axios(
-          "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
+          // "https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group"
+          "https://0v3zjmzna4.execute-api.eu-west-3.amazonaws.com/live/group"
         );
         setState({groups: res.data.groups })
       } catch (e) {
@@ -46,7 +47,8 @@ function App() {
     let request = {
       host: "g84ric8qt4.execute-api.eu-west-3.amazonaws.com",
       method: "PUT",
-      url: `https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron`,
+      // url: `https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/cron`,
+      url:` https://0v3zjmzna4.execute-api.eu-west-3.amazonaws.com/live/cron`,
       data: { cron: value }, // object describing the foo
       body: JSON.stringify({ cron: value }), // aws4 looks for body; axios for data
       path: `/live/cron`,

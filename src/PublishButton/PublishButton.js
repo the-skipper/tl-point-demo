@@ -13,7 +13,8 @@ async function postGroup({ name, origins, destinations }) {
     let request = {
       host: "g84ric8qt4.execute-api.eu-west-3.amazonaws.com",
       method: "POST",
-      url: `https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group`,
+      // url: `https://g84ric8qt4.execute-api.eu-west-3.amazonaws.com/live/group`,
+      url:`https://0v3zjmzna4.execute-api.eu-west-3.amazonaws.com/live/group`,
       data: { name, origins, destinations }, // object describing the foo
       body: JSON.stringify({ name, origins, destinations }), // aws4 looks for body; axios for data
       path: `/live/group`,
