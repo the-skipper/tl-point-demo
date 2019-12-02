@@ -76,14 +76,20 @@ class Map extends React.Component {
 
     this.map.getViewModel().setLookAtData({
       tilt: 45,
-      heading: 60
+      heading: 180
     });
 
     this.originIcon = new window.H.map.DomIcon(this.originIconDomEl, {});
-    this.selectedOriginIcon = new window.H.map.DomIcon(this.selectedOriginIconDomEl, {});
-    
+    this.selectedOriginIcon = new window.H.map.DomIcon(
+      this.selectedOriginIconDomEl,
+      {}
+    );
+
     this.destIcon = new window.H.map.DomIcon(this.destIconDomEl, {});
-    this.selectedDestIcon = new window.H.map.DomIcon(this.selectedDestIconDomEl, {});
+    this.selectedDestIcon = new window.H.map.DomIcon(
+      this.selectedDestIconDomEl,
+      {}
+    );
   }
 
   componentDidUpdate() {
@@ -104,33 +110,34 @@ class Map extends React.Component {
         };
         this.map.setCenter(groupCenter);
 
-        this.context[0].coords.o.forEach((row,i) => {
+        this.context[0].coords.o.forEach((row, i) => {
           // this.addMarker({ lat: row.latitude, lng: row.longitude }, this.InactiveIcon);
           this.addDomMarker(
             { lat: row.latitude, lng: row.longitude },
-            this.originIcon,'o',i
+            this.originIcon,
+            "o",
+            i
           );
         });
-        this.context[0].coords.d.forEach((row,i) => {
+        this.context[0].coords.d.forEach((row, i) => {
           this.addDomMarker(
             { lat: row.latitude, lng: row.longitude },
-            this.destIcon,'d',i
+            this.destIcon,
+            "d",
+            i
           );
         });
       }
-      for(let {marker, id, type} of this.DOMmarkers){
+      for (let { marker, id, type } of this.DOMmarkers) {
         let selected = this.context[0].selectedPoints;
         if (selected.includes(id)) {
-      
-          if(type==="o")marker.setIcon(this.originIcon);
-          if(type==="d")marker.setIcon(this.destIcon);
-
+          if (type === "o") marker.setIcon(this.originIcon);
+          if (type === "d") marker.setIcon(this.destIcon);
         } else {
-          if(type==="o")marker.setIcon(this.selectedOriginIcon);
-          if(type==="d")marker.setIcon(this.selectedDestIcon);
-
+          if (type === "o") marker.setIcon(this.selectedOriginIcon);
+          if (type === "d") marker.setIcon(this.selectedDestIcon);
         }
-      };
+      }
     }
   }
 
@@ -139,9 +146,9 @@ class Map extends React.Component {
     this.map.removeEventListener("tap", this.handleMapClick);
   }
 
-  addDomMarker(coord, icon,type,i) {
+  addDomMarker(coord, icon, type, i) {
     let marker = new window.H.map.DomMarker(coord, { icon });
-    this.DOMmarkers.push({marker, id:`${type}-${i}`, type});
+    this.DOMmarkers.push({ marker, id: `${type}-${i}`, type });
     this.map.addObject(marker);
   }
 
